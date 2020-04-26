@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dbp.apps.DbpConfig',
 
     'rest_framework',
     'rest_framework.authtoken',
 
+    'dbp',
     'products',
     'customers',
     'orders'
