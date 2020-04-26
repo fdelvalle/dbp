@@ -6,6 +6,7 @@ RUN apt-get update -y
 
 ENV PYTHONUNBUFFERED 1
 ENV LIBRARY_PATH=/lib:/usr/lib
+ENV DJANGO_SETTINGS_MODULE=core.settings.container
 
 RUN apt-get install tzdata \
         && cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
@@ -15,6 +16,4 @@ RUN mkdir /src
 WORKDIR /src
 COPY . /src/
 RUN pip install -r core/requirements.txt
-#RUN python manage.py makemigrations
-#RUN python manage.py migrate
 

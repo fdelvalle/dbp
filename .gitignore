@@ -6,3 +6,5 @@ gen
 lib/include/
 __pycache__
 *.pyc
+!/lib/
+!/db.sqlite3
