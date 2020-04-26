@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from dbp import views
+
 urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
     path('api/v1/', include(('dbp.urls_api', 'dbp'), namespace="api-v1")),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
 ]

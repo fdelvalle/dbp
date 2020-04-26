@@ -28,7 +28,6 @@ docker-compose up
 docker exec -t -i dbp_web_1  bash
 
 #### In bash mode
-./manage makemigrations
 ./manage migrate
 ./manager createsuperuser
 
