@@ -1,10 +1,13 @@
+from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet, ModelViewSet
 
+from customers.models import Customer
 from dbp import serializers
+from orders.models import Order, OrderItem
 from products.models import Product, Category, Color, Sku
 
 
@@ -29,6 +32,30 @@ class ColorViewSet(ModelViewSet):
 class SkuViewSet(ModelViewSet):
     queryset = Sku.objects.all()
     serializer_class = serializers.SkuSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class OrderViewSet(ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = serializers.OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class OrderItemViewSet(ModelViewSet):
+    queryset = OrderItem.objects.all()
+    serializer_class = serializers.OrderItemSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class CustomerViewSet(ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = serializers.CustomerSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
     permission_classes = [IsAuthenticated]
 
 
