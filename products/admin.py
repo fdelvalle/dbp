@@ -6,11 +6,12 @@ from products.models import Product, Color, Category, Sku
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    fields = ['name', 'is_active']
+
 
 @admin.register(Color)
 class ColorAdmin(admin.ModelAdmin):
-    pass
+    fields = ['name', 'is_active']
 
 
 class SkuInline(admin.TabularInline):
@@ -20,6 +21,7 @@ class SkuInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    fields = ['category', 'name', 'status', 'is_active']
     inlines = [SkuInline]
 
 
