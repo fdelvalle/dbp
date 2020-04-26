@@ -25,6 +25,7 @@ PRODUCT_STATUS = (
 
 
 class Product(BaseMixin):
+    category = models.ForeignKey(to=Category, verbose_name="Categoria", on_delete=models.CASCADE, related_name="category_products")
     name = models.CharField(verbose_name="Nome", max_length=30, null=False, blank=False, db_index=True, unique=True)
     slug = models.SlugField(verbose_name="slug", max_length=50, null=False, blank=False, db_index=True, unique=True)
     slug.pre_save = slugify_save
@@ -62,9 +63,9 @@ SIZE = (
 
 
 class Sku(BaseMixin):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=False, blank=False, related_name="skus")
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE, null=False, blank=False, related_name="skus")
     size = models.IntegerField(verbose_name="Tamanho", choices=SIZE, null=False, blank=False, default=1)
-    color = models.ForeignKey(Color, on_delete=models.CASCADE, null=False, blank=False, related_name="color_skus")
+    color = models.ForeignKey(to=Color, on_delete=models.CASCADE, null=False, blank=False, related_name="color_skus")
 
     class Meta:
         verbose_name = 'Sku'

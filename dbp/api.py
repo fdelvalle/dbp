@@ -2,9 +2,34 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet, ModelViewSet
 
-from dbp.serializers import TokenSerializer
+from dbp import serializers
+from products.models import Product, Category, Color, Sku
+
+
+class ProductViewSet(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = serializers.ProductSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = serializers.CategorySerializer
+    permission_classes = [IsAuthenticated]
+
+
+class ColorViewSet(ModelViewSet):
+    queryset = Color.objects.all()
+    serializer_class = serializers.ColorSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class SkuViewSet(ModelViewSet):
+    queryset = Sku.objects.all()
+    serializer_class = serializers.SkuSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class TokenViewSet(ViewSet):
@@ -33,7 +58,7 @@ class TokenViewSet(ViewSet):
 
     def list(self, request):
         queryset = self.get_object()
-        serializer = TokenSerializer(queryset, many=True)
+        serializer = serializers.TokenSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def create(self, request):
